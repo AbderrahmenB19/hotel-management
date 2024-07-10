@@ -1,0 +1,67 @@
+<div class="container py-4">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">All Bookings</h2>
+      </div>
+      <div class="alert alert-success" *ngIf="msg">
+        {{msg}}
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="searchTerm" class="form-label">Filter by Booking Number:</label>
+          <input
+            type="text"
+            id="searchTerm"
+            class="form-control"
+            [(ngModel)]="searchTerm"
+            (input)="handleSearchChange($event)"
+            placeholder="Enter booking number"
+          />
+        </div>
+  
+        <div class="list-group">
+          <div *ngFor="let booking of filteredBookings" class="list-group-item">
+            <h5 class="mb-1">Booking Code: {{ booking.bookingConfigurationCode }}</h5>
+            <p class="mb-1">Check In Date: {{ booking.checkInDate }}</p>
+            <p class="mb-1">Check Out Date: {{ booking.checkOutDate }}</p>
+            <p class="mb-1">Total Guests: {{ booking.totalNumOfGuest }}</p>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="cancelBooking(booking.id)"
+            >cancel Booking</button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mt-3" *ngIf="pageResponseBookingDTO.content?.length">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" [class.disabled]="pageNumber === 0">
+                        <a class="page-link" href="javascript:void(0)" aria-label="First" (click)="goToFirstPage()">
+                            <i class="fa-solid fa-angles-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item" [class.disabled]="pageNumber === 0">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Previous" (click)="goToPreviousPage()">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of pages; let i = index" [class.active]="pageNumber === i">
+                        <a class="page-link" href="javascript:void(0)" (click)="goToPage(i)">{{ i + 1 }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="isLastPage">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Next" (click)="goToNextPage()">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item" [class.disabled]="isLastPage">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Last" (click)="goToLastPage()">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  

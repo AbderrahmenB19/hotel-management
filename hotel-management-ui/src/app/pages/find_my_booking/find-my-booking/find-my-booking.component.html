@@ -1,0 +1,49 @@
+<div class="container text-center">
+    <div *ngIf="!bookingDetails"
+    class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>{{errorMsg}}</strong>
+    </div>
+    @if(!findAvecSuccess){
+    <h6 class="display-4 text-success">Find Your Booking</h6>
+    <hr class="mb-5 ">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 mb-3">
+            <input type="text" class="form-control" placeholder="Type your code" [(ngModel)]="bookingCode">
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-outline-success w-100" (click)="findBooking()">
+                Search <i class="faa fa-se4"></i>
+            </button>
+        </div>
+    </div>
+
+    }@else {
+    <div class="booking-details">
+        <h3>Booking Details</h3>
+        <p>Confirmation Code: {{bookingDetails.bookingConfigurationCode}}</p>
+        <p>Check-in Date: {{bookingDetails.checkInDate}}</p>
+        <p>Check-out Date: {{bookingDetails.checkOutDate}}</p>
+        <p>Num Of Adults: {{bookingDetails.numOfAdults}}</p>
+        <p>Num Of Children: {{bookingDetails.numOfChildren}}</p>
+
+        <br>
+        <hr>
+        <br>
+        <h3>Booker Detials</h3>
+        <div>
+            <p> Name: {{bookingDetails.user?.name}}</p>
+            <p> Email: {{bookingDetails.user?.email}}</p>
+            <p> Phone Number: {{bookingDetails.user?.phoneNumber}}</p>
+        </div>
+
+        <br />
+        <hr />
+        <br />
+        <h3>Room Details</h3>
+        <div>
+            <p> Room Type: {{bookingDetails.room?.roomType}}</p>
+            <img [src]='"data:image/jpg;base64,"+bookingDetails.room?.roomPhoto' alt="roomImage">
+        </div>
+    </div>
+    }
+</div>

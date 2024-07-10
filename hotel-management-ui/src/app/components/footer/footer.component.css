@@ -1,0 +1,13 @@
+footer {
+    background-color: #f8f9fa; 
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    
+    bottom: 0;
+  }
+  
+  .Myfooter {
+    font-size: 14px;
+    color: #6c757d; 
+  }

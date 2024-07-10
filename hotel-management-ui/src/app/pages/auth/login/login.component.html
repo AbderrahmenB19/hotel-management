@@ -1,0 +1,33 @@
+<div class="container text-center d-flex justify-content-center align-items-center min-vh-100 p-5">
+    <div class="row card w-100 w-md-75 w-lg-50 p-4">
+        <h6 class="card-header bg-opacity-25 bg-success text-center">Login</h6>
+        
+        <div class="card-body">
+            <div *ngIf="errorMsg.length" class="alert alert-danger">
+                @for (item of errorMsg; track $index) {
+                    <p>. {{item}}</p>
+                }
+            </div>
+            
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" [(ngModel)]="LoginRequest.email" placeholder="your@mail.com" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" [(ngModel)]="LoginRequest.password" maxlength="15" placeholder="password" class="form-control">
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <p class="mb-0" style="font-size: small;">
+                    Don't have an account? 
+                    <a href="javascript:void(0)" routerLink="/register">Register Now <i class="fas fa-door-closed"></i></a>
+                </p>
+                <button mat-stroked-button type="button" class="btn btn-outline-success" (click)="login()">
+                    Login
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

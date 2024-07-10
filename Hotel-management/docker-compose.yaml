@@ -1,0 +1,22 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-db-hotel
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE: Hotel-db
+      MYSQL_USER: abdou
+      MYSQL_PASSWORD: abdou
+    ports:
+      - "3302:3306"
+    networks:
+      - hotel-net
+    volumes:
+      - mysql-ht-db:/var/lib/mysql
+networks:
+  hotel-net:
+    driver: bridge
+volumes:
+  mysql-ht-db:
+    driver: local
+

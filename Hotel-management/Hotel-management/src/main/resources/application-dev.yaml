@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3302/Hotel-db
+    username: abdou
+    password: abdou
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: abderrahmenbennacer622@gmail.com
+    password: cbqilqwluhbbpzkt
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        ssl:
+          enable: false  # Disable SSL if you are using STARTTLS
+server:
+  port: 9090
+application:
+  file-upload-path: ./upload
+

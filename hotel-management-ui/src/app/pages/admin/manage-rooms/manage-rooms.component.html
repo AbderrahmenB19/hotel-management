@@ -1,0 +1,80 @@
+<div class="container p-2">
+    <div class="text-center">
+        <h4 class="display-4 text-success fw-bold">All Rooms</h4>
+        <hr>
+    </div>
+    <div class="row mb-3">
+        <div 
+        class="alert alert-success" 
+        
+        *ngIf="msg">
+        {{ msg }}
+    </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Filter By Room Type</mat-label>
+                <mat-select (selectionChange)="onFilterChange($event)">
+                    <mat-option *ngFor="let item of Types; let index = index" [value]="item">{{ item }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class=" d-flex  justify-content-end row-cols-6 tex"
+    ><button mat-flat-button routerLink="/save-room"> Add Room</button>
+</div>
+    
+  
+    <div>
+        <ng-container *ngFor="let item of PageResponseAllRoomDto.content; let index = index">
+            <div class="container   p-2 mt-5 card" style="border: 2px solid green;">
+                <div class="row ">
+                    <div class="col-md-3 mb-2">
+                        <img [src]='"data:image/jpg;base64,"+item.roomPhoto' class="card-img-top" alt="roomPicture" style="height: 150px ; width: 150px;">
+                    </div>
+                    <div class="card-boy col-md-7 mb-1 overflow-x-auto">
+                        <h5 class="card-title fs-4 text-success text-nowrap mb-1 fw-semibold">{{item?.roomType}}</h5>
+                        <h6 class="card-subtitle fs-6 text-secondary mb-2">price: {{item?.roomPrice}}$</h6>
+                        <h6 class="card-subtitle fs-6 text-secondary mb-1">Description:</h6>
+                        <p class="card-text">{{item?.roomDescription}}</p>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-success" (click)="onEditRoom(item.id)"> Edit</button>&nbsp;&nbsp;
+                        <button class="btn btn-danger" (click)="onDelete(item.id)"> delete</button>
+                    </div>
+            
+                </div>
+            
+            </div>
+        </ng-container>
+        <div class="d-flex justify-content-center mt-3" *ngIf="PageResponseAllRoomDto.content?.length">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" [class.disabled]="pageNumber === 0">
+                        <a class="page-link" href="javascript:void(0)" aria-label="First" (click)="goToFirstPage()">
+                            <i class="fa-solid fa-angles-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item" [class.disabled]="pageNumber === 0">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Previous" (click)="goToPreviousPage()">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of pages; let i = index" [class.active]="pageNumber === i">
+                        <a class="page-link" href="javascript:void(0)" (click)="goToPage(i)">{{ i + 1 }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="isLastPage">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Next" (click)="goToNextPage()">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item" [class.disabled]="isLastPage">
+                        <a class="page-link" href="javascript:void(0)" aria-label="Last" (click)="goToLastPage()">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+  </div>
+  

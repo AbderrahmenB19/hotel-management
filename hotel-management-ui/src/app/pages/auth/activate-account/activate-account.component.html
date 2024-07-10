@@ -1,0 +1,35 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="row text-center card w-100 w-sm-75 w-md-50 w-lg-40">
+      <ng-container *ngIf="submitted; else codeForm">
+        <ng-container *ngIf="isOkay; else activationError">
+          <div class="card-header bg-success bg-opacity-25">
+            <h6 class="display-6">Your account activated successfully!</h6>
+            <p>
+              Now you can: 
+              <a routerLink="/login">Go to Login <i class="fas fa-directions"></i></a>
+            </p>
+          </div>
+        </ng-container>
+        <ng-template #activationError>
+          <div class="card-header bg-danger bg-opacity-25">
+            <h6 class="display-6">Activation Failed!</h6>
+            <p>{{ message }}</p>
+            <button class="btn btn-primary" (click)="submitted = false">Try again</button>
+          </div>
+        </ng-template>
+      </ng-container>
+      <ng-template #codeForm>
+        <div class="card-header bg-warning bg-opacity-25">
+          <h6 class="display-6">Type your activation Code</h6>
+        </div>
+        <div class="col-12 card-body">
+          <code-input
+            [isCodeHidden]="false"
+            [codeLength]="6"
+            (codeCompleted)="onCodeCompleted($event)">
+          </code-input>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  

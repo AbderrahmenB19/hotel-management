@@ -1,0 +1,18 @@
+<div class="container   p-2 mt-5 card" style="border: 2px solid green;">
+    <div class="row ">
+        <div class="col-md-3 mb-2">
+            <img [src]='selectedPhoto' class="card-img-top" alt="roomPicture" style="height: 150px ; width: 150px;">
+        </div>
+        <div class="card-boy col-md-7 mb-1 overflow-x-auto">
+            <h5 class="card-title fs-4 text-success text-nowrap mb-1 fw-semibold">{{roomDTO?.roomType}}</h5>
+            <h6 class="card-subtitle fs-6 text-secondary mb-2">price: {{roomDTO?.roomPrice}}$</h6>
+            <h6 class="card-subtitle fs-6 text-secondary mb-1">Description:</h6>
+            <p class="card-text">{{roomDTO?.roomDescription}}</p>
+        </div>
+        <div class="col-md-2 d-flex justify-content-center align-items-center">
+            <button class="btn btn-success" (click)="onvieworBook()"> view\book</button>
+        </div>
+
+    </div>
+
+</div>

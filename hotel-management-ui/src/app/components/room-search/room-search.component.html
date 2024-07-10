@@ -1,0 +1,79 @@
+<div class="container mt-5">
+  <div class="row align-items-end g-3">
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-label>Check In</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="startDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-label>Check out</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="endDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-label>Select</mat-label>
+        <mat-select [(ngModel)]="roomTypeSelected">
+          <mat-option value="one">select a room type </mat-option>
+          @for (item of roomTypes; track $index) {
+            <mat-option value={{item}}  >{{item}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div class="col-md-3 d-flex align-items-center justify-content-center p-4">
+      <button  mat-stroked-button type="button" class="  w-100  d-block" (click)="onSearchRooms()">
+        Search <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+ @for (item of pageResponseRoomDTO.content; track $index) {
+  <app-room-card [roomDTO]="item"></app-room-card>
+
+ }
+
+  <div class="d-flex justify-content-center mt-3" *ngIf="pageResponseRoomDTO.content">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a (click)="goToFirstPage()" class="page-link" href="javascript:void(0)" aria-label="Previous"
+            [class.disabled]="pageNumber === 0">
+            <i class="fa-solid fa-angles-left"></i>
+          </a>
+        </li>
+        <li class="page-item">
+          <a (click)="goToPreviousPage()" class="page-link" href="javascript:void(0)" aria-label="Previous"
+            [class.disabled]="pageNumber === 0">
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+        </li>
+        <li class="page-item" *ngFor="let index of [].constructor(pages); let i=index ">
+          <a (click)="gotToPage(index)" class="page-link" [class.active]="pageNumber === index"
+            href="javascript:void(0)">{{ i + 1 }}</a>
+        </li>
+        <li class="page-item">
+          <a (click)="goToNextPage()" class="page-link" href="javascript:void(0)" aria-label="Next"
+            [class.disabled]="isLastPage">
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </li>
+        <li class="page-item">
+          <a (click)="goToLastPage()" class="page-link" href="javascript:void(0)" aria-label="Next"
+            [class.disabled]="isLastPage">
+            <i class="fa-solid fa-angles-right"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</div>
